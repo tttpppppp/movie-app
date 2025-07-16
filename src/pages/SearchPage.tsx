@@ -26,8 +26,6 @@ const SearchPage = () => {
     )}&vote_average.gte=${min / 10}&vote_average.lte=${max / 10}`
   );
 
-  console.log(valueFormSearch);
-
   return (
     <div>
       <Helmet>

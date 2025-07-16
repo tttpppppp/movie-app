@@ -24,7 +24,7 @@ const Banner = ({
   const { setcontent, setisShowing } = useModal();
 
   return (
-    <div className="relative text-white overflow-hidden shadow-sm bg-black smL:bg-transparent">
+    <div className="relative text-white overflow-hidden shadow-sm bg-black sm:bg-transparent">
       {/* Background image */}
       <ImageComponent
         src={`https://image.tmdb.org/t/p/original${backdrop_path}`}

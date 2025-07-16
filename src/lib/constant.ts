@@ -10,11 +10,6 @@ export const TAB_LIST = [
     url: "https://api.themoviedb.org/3/trending/movie/day",
   },
   {
-    id: "person",
-    name: "People",
-    url: "https://api.themoviedb.org/3/trending/person/day",
-  },
-  {
     id: "tv",
     name: "TV",
     url: "https://api.themoviedb.org/3/trending/tv/day",

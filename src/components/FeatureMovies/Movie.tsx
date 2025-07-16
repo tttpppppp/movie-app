@@ -19,7 +19,9 @@ const Movie = ({ data, trailerVideoKey }: Props) => {
         alt="Banner"
       />
       <div className="absolute bottom-[15%] left-8 w-[90%] sm:w-1/2 text-white">
-        <p className="font-bold text-xl sm:text-3xl mb-2">{data?.title}</p>
+        <p className="font-bold text-xl sm:text-3xl mb-2 NextflixSans-bold">
+          {data?.title}
+        </p>
         <div>
           <p className="text-gray-300 border border-gray-400 inline-block px-2 py-1 rounded-sm text-sm mb-2">
             BG13

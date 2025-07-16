@@ -1,33 +1,32 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
 @font-face {
   font-family: "Nextflix Sans";
-  src: local("NextflixSans-Regular"),
-    url("/fonts/NextflixSans-Regular.woff2") format("woff");
+  src: url("/fonts/NextflixSans-Regular.woff2") format("woff2");
+  font-weight: normal;
 }
 
 @font-face {
   font-family: "Nextflix Sans";
-  src: local("NextflixSans-bold"),
-    url("/fonts/NextflixSans-Bold.woff2") format("woff");
+  src: url("/fonts/NextflixSans-Bold.woff2") format("woff2");
   font-weight: bold;
 }
+
 @font-face {
   font-family: "Nextflix Sans";
-  src: local("NextflixSans-light"),
-    url("/fonts/NextflixSans-Light.woff2") format("woff2");
+  src: url("/fonts/NextflixSans-Light.woff2") format("woff2");
   font-weight: 300;
 }
+
 @font-face {
   font-family: "Nextflix Sans";
-  src: local("NextflixSans-Medium"),
-    url("/fonts/NextflixSans-Medium.woff2") format("woff2");
+  src: url("/fonts/NextflixSans-Medium.woff2") format("woff2");
+  font-weight: 500;
 }
 
 body {
-  font-family: "Nextflix Sans";
+  font-family: "Nextflix Sans", sans-serif;
 }
 
 @layer components {

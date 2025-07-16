@@ -5,6 +5,7 @@ import RelatedMediaList from "../components/MediaDedtail/RelatedMediaList";
 import type { MediaType, TmdbResponse } from "../types/shared-media.type";
 import { Helmet } from "react-helmet";
 import Loading from "../components/Loading";
+import Pagination from "../components/SearchForm/Pagination";
 
 const SearchPage = () => {
   const [valueFormSearch, setvalueFormSearch] = useState({
@@ -12,6 +13,8 @@ const SearchPage = () => {
     genres: [],
     rating: "all",
   });
+
+  const [page, setpage] = useState(1);
 
   const [min, max] =
     valueFormSearch.rating === "all"
@@ -23,8 +26,10 @@ const SearchPage = () => {
       valueFormSearch.mediaType
     }?sort_by=popularity.desc&with_genres=${valueFormSearch.genres.join(
       ","
-    )}&vote_average.gte=${min / 10}&vote_average.lte=${max / 10}`
+    )}&vote_average.gte=${min / 10}&vote_average.lte=${max / 10}&page=${page}`
   );
+
+  console.log(valueFormSearch);
 
   return (
     <div>
@@ -43,8 +48,15 @@ const SearchPage = () => {
             {isLoading ? (
               <Loading />
             ) : (
-              <RelatedMediaList mediaList={data?.results || []} title="" />
+              <div>
+                <RelatedMediaList mediaList={data?.results || []} title="" />
+              </div>
             )}
+            <Pagination
+              currentPage={page}
+              totalPages={data?.total_pages || 0}
+              onPageChange={(newPage) => setpage(newPage)}
+            />
           </div>
         </div>
       </div>

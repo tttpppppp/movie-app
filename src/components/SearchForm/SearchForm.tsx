@@ -16,9 +16,11 @@ const SearchForm = ({ setvalueFormSearch }: any) => {
       mediaType: ["movie", "tv"].includes(mediaType) ? mediaType : "movie",
       genres: [],
       rating: "all",
+      page: 1,
     },
   });
   const dataChange = watch();
+
   useEffect(() => {
     setvalueFormSearch(dataChange);
   }, [JSON.stringify(dataChange)]);
@@ -50,12 +52,6 @@ const SearchForm = ({ setvalueFormSearch }: any) => {
           control={control}
           Component={RatingInput}
         />
-        {/* <button
-          type="submit"
-          className="mt-3 border rounded p-1 hover:bg-slate-200 dark:hover:bg-slate-700"
-        >
-          Tìm kiếm
-        </button> */}
       </form>
     </div>
   );

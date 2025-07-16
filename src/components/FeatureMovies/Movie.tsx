@@ -10,8 +10,6 @@ interface Props {
 }
 const Movie = ({ data, trailerVideoKey }: Props) => {
   const { setcontent, setisShowing } = useModal();
-  console.log(trailerVideoKey);
-
   return (
     <div>
       {" "}

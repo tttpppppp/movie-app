@@ -12,12 +12,8 @@ const MediaList = ({
 }) => {
   const [activeTabId, setactiveTabId] = useState(tabs[0]?.id);
   const url = tabs.find((item) => item.id === activeTabId)?.url;
-  const parts = url?.split("https://api.themoviedb.org/3/");
-  const endpoint = parts?.[1] || "";
 
-  const { data } = useFetch<TmdbResponse<MediaType>>(
-    `${endpoint}?language=vi-VN`
-  );
+  const { data } = useFetch<TmdbResponse<MediaType>>(`${url}?language=vi-VN`);
 
   const mediaList = data?.results.slice(0, 12) || [];
 

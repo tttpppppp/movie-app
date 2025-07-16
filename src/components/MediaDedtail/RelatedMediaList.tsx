@@ -10,7 +10,7 @@ const RelatedMediaList = ({ mediaList = [], title }: Props) => {
     <div>
       <p className="font-bold text-[1.4vw] my-4">{title}</p>
       {mediaList.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
           {mediaList.map((item: MediaType) => (
             <MovieCard
               key={item.id}

@@ -38,7 +38,7 @@ const ModalProvider = ({ children }: Props) => {
     <ModalContext.Provider value={{ setisShowing, setcontent }}>
       {children}
       {isShowing && (
-        <div className="fixed inset-0 z-50">
+        <div className="fixed inset-0 z-50 ">
           <div
             className="absolute inset-0 bg-slate-600/60 flex items-center justify-center"
             onClick={() => {

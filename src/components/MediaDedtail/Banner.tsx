@@ -24,60 +24,57 @@ const Banner = ({
   const { setcontent, setisShowing } = useModal();
 
   return (
-    <div className="relative text-white overflow-hidden shadow-sm">
+    <div className="relative text-white overflow-hidden shadow-sm bg-black smL:bg-transparent">
       {/* Background image */}
       <ImageComponent
         src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
         width={800}
         height={500}
-        className="absolute inset-0 w-full brightness-[.2] -z-10"
+        className="absolute  inset-0 w-full brightness-[.2] -z-10 hidden sm:block"
       />
 
       {/* Content */}
-      <div className="relative max-w-screen-xl mx-auto p-6 flex flex-col lg:flex-row gap-8">
+      <div className="relative max-w-screen-xl mx-auto p-4 sm:p-6 flex flex-col lg:flex-row gap-6 lg:gap-8 text-white">
         {/* Poster */}
-        <div className="flex-shrink-0 w-full lg:w-[300px]">
+        <div className="w-full lg:w-[300px] flex-shrink-0">
           <ImageComponent
             src={`https://image.tmdb.org/t/p/original${poster_path}`}
             width={300}
             height={450}
-            className="rounded-lg w-full"
+            className="rounded-lg w-full h-auto"
           />
         </div>
 
         {/* Movie Info */}
-        <div className="flex-1 text-base space-y-5">
-          <div className="text-4xl flex gap-2">
+        <div className="flex-1 text-base space-y-5 mt-6 lg:mt-0">
+          {/* Title */}
+          <div className="text-3xl sm:text-4xl flex gap-2 flex-wrap items-center">
             <h1 className="font-bold">{title}</h1>
             <span className="text-slate-500">
               {`(${release_date?.split("-")[0]})`}
             </span>
           </div>
 
-          <div className="flex items-center flex-wrap gap-4 text-sm text-gray-300">
-            <span className="border border-gray-400 px-2 py-0.5 rounded">
-              {certification}
-            </span>
+          {/* Metadata */}
+          <div className="flex items-center flex-wrap gap-3 text-sm text-gray-300">
+            {certification && (
+              <span className="border border-gray-400 px-2 py-0.5 rounded">
+                {certification}
+              </span>
+            )}
             <span>
-              {release_date}
-              <span className="ml-1"></span>
-              {`(${origin_country})`}
+              {release_date} ({origin_country})
             </span>
-            <span>
-              {(genres || []).map((item: Genre) => item.name).join(", ")}
-            </span>
-            <span>{runtime ? `${runtime} phút` : ""}</span>
+            {genres?.length > 0 && (
+              <span>{genres.map((item: Genre) => item.name).join(", ")}</span>
+            )}
+            {runtime && <span>{runtime} phút</span>}
           </div>
 
-          {/* Rating + Trailer */}
-          <div className="flex items-center mt-2">
-            <div className="flex items-center justify-center">
-              {/* <CircularProcessbar
-                  size={60}
-                  percent={90}
-                  strokeColor="limegreen"
-                /> */}
-            </div>
+          {/* Trailer + Rating */}
+          <div className="flex items-center gap-4 flex-wrap">
+            {/* Rating (chừa chỗ để bạn thêm sau nếu cần) */}
+            {/* <div>★ {vote_average}</div> */}
             <button
               className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded transition"
               onClick={() => {
@@ -86,7 +83,7 @@ const Banner = ({
                   <iframe
                     title="Trailer"
                     src={`https://www.youtube.com/embed/${trailerVideoKey}`}
-                    className="w-[50vw] aspect-video"
+                    className="w-[90vw] sm:w-[60vw] aspect-video"
                   />
                 );
               }}
@@ -96,8 +93,10 @@ const Banner = ({
             </button>
           </div>
 
+          {/* Tagline */}
+          {tagline && <p className="text-slate-300 mt-2 italic">{tagline}</p>}
+
           {/* Overview */}
-          <p className="text-slate-300 mt-2 italic">{tagline}</p>
           <div>
             <h2 className="text-xl font-semibold mb-1">Overview</h2>
             <p className="text-gray-300 leading-relaxed">
@@ -106,7 +105,7 @@ const Banner = ({
           </div>
 
           {/* Credits */}
-          <div className="grid grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
             <div>
               <p className="text-gray-400">Director</p>
               <p className="font-semibold">{director?.name}</p>
@@ -114,7 +113,6 @@ const Banner = ({
             <div>
               <p className="text-gray-400">Writer</p>
               <p className="font-semibold">
-                {" "}
                 {(writers || []).map((item) => item.name).join(", ")}
               </p>
             </div>

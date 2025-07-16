@@ -68,7 +68,7 @@ const MovieDetail = () => {
         />
       )}
       <div className="bg-black text-white text-[1.2vw]">
-        <div className="flex max-w-screen-xl mx-auto p-6 py-10 gap-5">
+        <div className="flex flex-col-reverse sm:flex-row  max-w-screen-xl mx-auto p-6 py-10 gap-5">
           <div className="flex-[2]">
             {movieDetail?.credits?.cast && (
               <ActorList actor={movieDetail?.credits?.cast} />

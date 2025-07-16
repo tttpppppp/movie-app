@@ -40,7 +40,7 @@ const SearchPage = () => {
       </Helmet>
       <div className="container">
         <p className="font-bold text-2xl mb-2">Search</p>
-        <div className="flex gap-4 items-start">
+        <div className="flex flex-col sm:flex-row gap-4 items-start">
           <div className="flex-1 border p-4 rounded-lg shadow-sm mt-4">
             <SearchForm setvalueFormSearch={setvalueFormSearch} />
           </div>

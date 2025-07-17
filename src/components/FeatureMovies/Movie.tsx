@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import type { MediaType } from "../../types/shared-media.type";
 import { useModal } from "../../context/ModalProvider";
+import slugify from "slugify";
 
 interface Props {
   data: MediaType;
@@ -10,6 +11,8 @@ interface Props {
 }
 const Movie = ({ data, trailerVideoKey }: Props) => {
   const { setcontent, setisShowing } = useModal();
+  const slug = slugify(data.title || "", { lower: true });
+  const path = `${slug}-${data.id}`;
   return (
     <div>
       {" "}
@@ -50,7 +53,7 @@ const Movie = ({ data, trailerVideoKey }: Props) => {
             Trailer
           </button>
           <Link
-            to={`/detail/movie/${data.id}`}
+            to={`/detail/movie/${path}`}
             className="bg-slate-300/35 text-white px-4 py-2 rounded-sm flex items-center text-sm sm:text-lg"
           >
             Xem chi tiết

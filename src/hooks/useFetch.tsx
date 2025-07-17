@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 const DEFAULT_HEADER = {
   accept: "application/json",
@@ -18,35 +18,27 @@ export default function useFetch<T = unknown>(
 ) {
   const { method = "GET", headers = {}, enabled = true } = options;
 
-  const [data, setData] = useState<T | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const fullUrl = `${import.meta.env.VITE_HOST}/${url}`;
 
-  useEffect(() => {
-    if (!enabled || !url) return;
-
-    setIsLoading(true);
-
-    fetch(`${import.meta.env.VITE_HOST}/${url}`, {
+  // fetcher với headers hợp lệ
+  const fetcher = async (url: string): Promise<T> => {
+    const response = await fetch(url, {
       method,
       headers: {
         ...DEFAULT_HEADER,
         ...headers,
       },
-    })
-      .then(async (response) => {
-        if (!response.ok) throw new Error("Failed to fetch");
-        const json = await response.json();
-        setData(json);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [url, method, JSON.stringify(headers), enabled]);
+    });
+    if (!response.ok) throw new Error("Failed to fetch");
+    return response.json();
+  };
 
-  return { data, isLoading, error };
+  const shouldFetch = enabled && !!url;
+
+  const { data, error, isLoading } = useSWR<T>(
+    shouldFetch ? fullUrl : null,
+    fetcher
+  );
+
+  return { data, error, isLoading };
 }

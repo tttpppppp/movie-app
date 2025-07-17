@@ -41,7 +41,7 @@ const Movie = ({ data, trailerVideoKey }: Props) => {
                 <iframe
                   title="Trailer"
                   src={`https://www.youtube.com/embed/${trailerVideoKey}`}
-                  className="w-[50vw] aspect-video"
+                  className="w-[90vw] sm:w-[50vw] aspect-video"
                 />
               );
             }}

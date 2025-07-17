@@ -25,7 +25,7 @@ export default function RouterElement() {
       ),
     },
     {
-      path: "/detail/tv/:id",
+      path: "/detail/tvshow/:id",
       element: (
         <LayoutClient>
           <TvShow />

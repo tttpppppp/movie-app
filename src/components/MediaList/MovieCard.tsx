@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import CircularProcessbar from "./CircularProcessbar";
 import Image from "../Image";
+import slugify from "slugify";
 
 interface MovieCardProps {
   id: number;
@@ -25,9 +26,13 @@ const MovieCard = ({
   media_type,
   activeTabId,
 }: MovieCardProps) => {
+  const slug = slugify(title || "", { lower: true });
+  const path = `${slug}-${id}`;
   return (
     <Link
-      to={media_type == "tv" ? `/detail/tv/${id}` : `/detail/movie/${id}`}
+      to={
+        media_type == "tv" ? `/detail/tvshow/${path}` : `/detail/movie/${path}`
+      }
       className="relative border border-slate-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300"
     >
       {(media_type === "tv" || (!media_type && activeTabId === "tv")) && (

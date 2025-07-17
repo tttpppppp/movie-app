@@ -12,16 +12,18 @@ import { Helmet } from "react-helmet";
 
 const MovieDetail = () => {
   const { id } = useParams();
+  const slugId = id?.split("-").pop();
+
   const { data: movieDetail, isLoading: isMovieLoading } = useFetch<MediaType>(
-    `movie/${id}?append_to_response=release_dates,credits,videos&language=vi-VN`
+    `movie/${slugId}?append_to_response=release_dates,credits,videos&language=vi-VN`
   );
   const { data: videoResponse } = useFetch<{ results: VideoType[] }>(
-    `movie/${id}/videos`,
+    `movie/${slugId}/videos`,
     { enabled: !!id }
   );
   const { data: relatedMovie, isLoading: isRelatedLoading } = useFetch<
     ApiResponse<MediaType>
-  >(`movie/${id}/recommendations?language=vi-VN`);
+  >(`movie/${slugId}/recommendations?language=vi-VN`);
 
   if (isMovieLoading || isRelatedLoading) {
     return <Loading />;

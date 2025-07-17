@@ -11,17 +11,18 @@ import type { MediaType, VideoType } from "../types/shared-media.type";
 import { Helmet } from "react-helmet";
 const TvShow = () => {
   const { id } = useParams();
+  const slugId = id?.split("-").pop();
   const { data: movieDetail, isLoading: isMovieLoading } = useFetch<MediaType>(
-    `tv/${id}?append_to_response=content_ratings,aggregate_credits,videos&language=vi-VN`
+    `tv/${slugId}?append_to_response=content_ratings,aggregate_credits,videos&language=vi-VN`
   );
 
   const { data: videoResponse } = useFetch<{ results: VideoType[] }>(
-    `tv/${id}/videos`,
+    `tv/${slugId}/videos`,
     { enabled: !!id }
   );
   const { data: relatedMovie, isLoading: isRelatedLoading } = useFetch<
     ApiResponse<MediaType>
-  >(`tv/${id}/recommendations?language=vi-VN`);
+  >(`tv/${slugId}/recommendations?language=vi-VN`);
 
   if (isMovieLoading || isRelatedLoading) {
     return <Loading />;

@@ -10,7 +10,7 @@ import type {
 import useFetch from "../../hooks/useFetch";
 
 const FutureMovie = () => {
-  const [selectedId, setselectedId] = useState<number | undefined>();
+  const [selectedId, setselectedId] = useState<number>();
 
   const { data } = useFetch<TmdbResponse<MediaType>>(
     "movie/popular?language=vi-VN"

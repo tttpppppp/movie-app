@@ -18,7 +18,8 @@ const RelatedMediaList = ({ mediaList = [], title }: Props) => {
     if (scrollBottom && !isLoading && visibleCount < mediaList.length) {
       setIsLoading(true);
       setTimeout(() => {
-        setVisibleCount((prev) => Math.min(prev + 8, mediaList.length));
+        const next = Math.min(visibleCount + 8, mediaList.length);
+        setVisibleCount(next);
         setIsLoading(false);
       }, 500);
     }
@@ -54,7 +55,7 @@ const RelatedMediaList = ({ mediaList = [], title }: Props) => {
       )}
       {isLoading && (
         <div className="flex justify-center items-center mt-4">
-          <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+          <div className="text-center py-4">Loading...</div>
         </div>
       )}
     </div>
